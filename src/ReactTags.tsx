@@ -35,8 +35,8 @@ interface IReactTags {
   handleAddition?: (t: any) => void;
   handleFilterSuggestions?: (q: any, s: any) => any;
   handleTagClick?: (e: any, i: any) => void;
-  allowDeleteFromEmptyInput: boolean;
-  allowAdditionFromPaste: boolean;
+  allowDeleteFromEmptyInput?: boolean;
+  allowAdditionFromPaste?: boolean;
   handleInputChange?: (e: any) => void;
   handleInputFocus?: (v: any) => void;
   handleInputBlur?: (v: any) => void;
@@ -239,6 +239,7 @@ const ReactTags: React.FC<IReactTags> = ({
 
   const _addTag = (t: any) => {
     let newTag = t;
+    console.log(t);
     if (!t.id || !t[labelField]) {
       return;
     }
