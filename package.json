@@ -1,0 +1,22 @@
+{
+  "name": "react-tag-input",
+  "version": "0.0.0-semantically-released",
+  "description": "React tags is a fantastically simple tagging component for your React projects",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "repository": "git@github.com:react-tags/react-tags.git",
+  "author": "Prakhar Srivastav",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "react",
+    "drag-drop",
+    "tags",
+    "tag input",
+    "react-component",
+    "autosuggest"
+  ],
+  "files": [
+    "lib/"
+  ]
+}
