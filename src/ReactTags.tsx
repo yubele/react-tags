@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useEffect, useState, useRef } from 'react';
-import { noop, uniq } from 'lodash';
+import { isEqual, noop, uniq } from 'lodash';
 import ClassNames from 'classnames';
 import Suggestions from './Suggestions';
 import Tag from './Tag';
@@ -124,12 +124,6 @@ const ReactTags: React.FC<IReactTags> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // componentDidUpdate(prevProps) {
-  //   if (!isEqual(prevProps.suggestions, this.props.suggestions)) {
-  //     this.updateSuggestions();
-  //   }
-  // }
-
   const _getQueryIndex = (q: any, i: any) =>
     i[labelField].toLowerCase().indexOf(q.toLowerCase());
 
@@ -207,6 +201,13 @@ const ReactTags: React.FC<IReactTags> = ({
     }));
   };
 
+  useEffect(() => {
+    if (!isEqual(state.suggestions, suggestions)) {
+      _updateSuggestions();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, suggestions]);
+
   const _handleChange = async (e: any) => {
     if (handleInputChange) {
       handleInputChange(e.target.value);
@@ -239,7 +240,6 @@ const ReactTags: React.FC<IReactTags> = ({
 
   const _addTag = (t: any) => {
     let newTag = t;
-    console.log(t);
     if (!t.id || !t[labelField]) {
       return;
     }
