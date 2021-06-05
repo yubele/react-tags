@@ -13,18 +13,14 @@ export default {
       file: packageJson.main,
       format: 'cjs',
       sourcemap: true,
+      exports: 'auto',
     },
     {
       file: packageJson.module,
       format: 'esm',
       sourcemap: true,
+      exports: 'auto',
     },
   ],
-  plugins: [
-    peerDepsExternal(),
-    resolve(),
-    commonjs(),
-    typescript(),
-    terser(),
-  ]
+  plugins: [peerDepsExternal(), resolve(), commonjs(), typescript(), terser()],
 };

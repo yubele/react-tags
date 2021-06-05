@@ -1,3 +1,9 @@
 node_modules/
 lib/
 .rollup.cache/
+.eslintcache
+*.log
+
+# IDE
+.idea
+.vscode
