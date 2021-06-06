@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { isEqual, noop, uniq } from 'lodash';
 import ClassNames from 'classnames';
-import Suggestions from './Suggestions';
+// import Suggestions from './Suggestions';
 import Tag from './Tag';
 
 import { buildRegExpFromDelimiters } from './utils';
@@ -81,15 +81,15 @@ const ReactTags: React.FC<IReactTags> = ({
   handleInputChange,
   handleInputFocus,
   handleInputBlur,
-  minQueryLength,
-  shouldRenderSuggestions,
+  // minQueryLength,
+  // shouldRenderSuggestions,
   removeComponent,
   classNames,
   name: inputName,
   id: inputId,
   maxLength,
   inputValue,
-  renderSuggestion,
+  // renderSuggestion,
 }) => {
   const textInput = useRef<HTMLInputElement>(null);
   const reactTagsRef = useRef<HTMLDivElement>(null);
@@ -189,21 +189,21 @@ const ReactTags: React.FC<IReactTags> = ({
     }
   };
 
-  const _updateSuggestions = () => {
-    const { query, selectedIndex } = state;
-    const sug = _filteredSuggestions(query, suggestions);
+  // const _updateSuggestions = () => {
+  //   const { query, selectedIndex } = state;
+  //   const sug = _filteredSuggestions(query, suggestions);
 
-    setState((prevState) => ({
-      ...prevState,
-      suggestions: sug,
-      selectedIndex:
-        selectedIndex >= sug.length ? sug.length - 1 : selectedIndex,
-    }));
-  };
+  //   setState((prevState) => ({
+  //     ...prevState,
+  //     suggestions: sug,
+  //     selectedIndex:
+  //       selectedIndex >= sug.length ? sug.length - 1 : selectedIndex,
+  //   }));
+  // };
 
   useEffect(() => {
     if (!isEqual(state.suggestions, suggestions)) {
-      _updateSuggestions();
+      // _updateSuggestions();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, suggestions]);
@@ -216,7 +216,7 @@ const ReactTags: React.FC<IReactTags> = ({
     const query = e.target.value.trim();
 
     await setState((prevProps) => ({ ...prevProps, query }));
-    _updateSuggestions();
+    // _updateSuggestions();
   };
 
   const _handleFocus = (e: any) => {
@@ -373,17 +373,17 @@ const ReactTags: React.FC<IReactTags> = ({
     uniq(t).forEach((tag) => _addTag({ id: tag, [labelField]: tag }));
   };
 
-  const _handleSuggestionClick = (i: any) => {
-    _addTag(state.suggestions[i]);
-  };
+  // const _handleSuggestionClick = (i: any) => {
+  //   _addTag(state.suggestions[i]);
+  // };
 
-  const _handleSuggestionHover = (i: any) => {
-    setState((prevState) => ({
-      ...prevState,
-      selectedIndex: i,
-      selectionMode: true,
-    }));
-  };
+  // const _handleSuggestionHover = (i: any) => {
+  //   setState((prevState) => ({
+  //     ...prevState,
+  //     selectedIndex: i,
+  //     selectionMode: true,
+  //   }));
+  // };
 
   const _getTagItems = () =>
     tags.map((tag, index) => (
@@ -404,9 +404,9 @@ const ReactTags: React.FC<IReactTags> = ({
   const _classNames = { ...DEFAULT_CLASSNAMES, ...classNames };
 
   // get the suggestions for the given query
-  const query = state.query.trim();
-  const { selectedIndex } = state;
-  const _suggestions = state.suggestions;
+  // const query = state.query.trim();
+  // const { selectedIndex } = state;
+  // const _suggestions = state.suggestions;
 
   const position = !inline ? INPUT_FIELD_POSITIONS.BOTTOM : inputFieldPosition;
 
@@ -432,7 +432,7 @@ const ReactTags: React.FC<IReactTags> = ({
         data-testid="input"
       />
 
-      <Suggestions
+      {/* <Suggestions
         query={query}
         suggestions={_suggestions}
         labelField={labelField}
@@ -444,7 +444,7 @@ const ReactTags: React.FC<IReactTags> = ({
         isFocused={state.isFocused}
         classNames={_classNames}
         renderSuggestion={renderSuggestion}
-      />
+      /> */}
     </div>
   ) : null;
 

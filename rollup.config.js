@@ -21,6 +21,13 @@ export default {
       sourcemap: true,
       exports: 'auto',
     },
+    {
+      name: 'ReactTags',
+      file: packageJson.browser,
+      format: 'umd',
+      sourcemap: true,
+      globals: { react: 'React' },
+    },
   ],
   plugins: [peerDepsExternal(), resolve(), commonjs(), typescript(), terser()],
 };

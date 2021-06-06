@@ -1,3 +1,3 @@
-import Tags from './ReactTags';
+import ReactTags from './ReactTags';
 
-export default Tags;
+export default ReactTags;

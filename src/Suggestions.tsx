@@ -1,24 +1,24 @@
-import React, { useRef, useEffect, memo } from 'react';
-import { escape, isEqual } from 'lodash';
+import React, { useRef, memo } from 'react';
+import { escape } from 'lodash';
 
-const maybeScrollSuggestionIntoView = (
-  suggestionEl: any,
-  suggestionsContainer: any
-) => {
-  const containerHeight = suggestionsContainer.offsetHeight;
-  const suggestionHeight = suggestionEl.offsetHeight;
-  const relativeSuggestionTop =
-    suggestionEl.offsetTop - suggestionsContainer.scrollTop;
+// const maybeScrollSuggestionIntoView = (
+//   suggestionEl: any,
+//   suggestionsContainer: any
+// ) => {
+//   const containerHeight = suggestionsContainer.offsetHeight;
+//   const suggestionHeight = suggestionEl.offsetHeight;
+//   const relativeSuggestionTop =
+//     suggestionEl.offsetTop - suggestionsContainer.scrollTop;
 
-  if (relativeSuggestionTop + suggestionHeight >= containerHeight) {
-    // eslint-disable-next-line no-param-reassign
-    suggestionsContainer.scrollTop +=
-      relativeSuggestionTop - containerHeight + suggestionHeight;
-  } else if (relativeSuggestionTop < 0) {
-    // eslint-disable-next-line no-param-reassign
-    suggestionsContainer.scrollTop += relativeSuggestionTop;
-  }
-};
+//   if (relativeSuggestionTop + suggestionHeight >= containerHeight) {
+//     // eslint-disable-next-line no-param-reassign
+//     suggestionsContainer.scrollTop +=
+//       relativeSuggestionTop - containerHeight + suggestionHeight;
+//   } else if (relativeSuggestionTop < 0) {
+//     // eslint-disable-next-line no-param-reassign
+//     suggestionsContainer.scrollTop += relativeSuggestionTop;
+//   }
+// };
 
 interface ISuggestions {
   query: string;
@@ -37,27 +37,27 @@ interface ISuggestions {
   renderSuggestion?: (item: any, query: any) => JSX.Element;
 }
 
-const shouldRerender = (q: any, minQueryLength: any, isFocused: any) =>
-  q.length >= minQueryLength && isFocused;
+// const shouldRerender = (q: any, minQueryLength: any, isFocused: any) =>
+//   q.length >= minQueryLength && isFocused;
 
-const areEqual = (prevProps: any, nextProps: any) =>
-  prevProps.isFocused !== nextProps.isFocused ||
-  !isEqual(prevProps.suggestions, nextProps.suggestions) ||
-  shouldRerender(
-    nextProps.query,
-    nextProps.minQueryLength,
-    nextProps.isFocused
-  ) ||
-  shouldRerender(
-    nextProps.query,
-    nextProps.minQueryLength,
-    nextProps.isFocused
-  ) !==
-    shouldRerender(
-      prevProps.query,
-      prevProps.minQueryLength,
-      prevProps.isFocused
-    );
+const areEqual = () => true;
+  // prevProps.isFocused !== nextProps.isFocused ||
+  // !isEqual(prevProps.suggestions, nextProps.suggestions) ||
+  // shouldRerender(
+  //   nextProps.query,
+  //   nextProps.minQueryLength,
+  //   nextProps.isFocused
+  // ) ||
+  // shouldRerender(
+  //   nextProps.query,
+  //   nextProps.minQueryLength,
+  //   nextProps.isFocused
+  // ) !==
+  //   shouldRerender(
+  //     prevProps.query,
+  //     prevProps.minQueryLength,
+  //     prevProps.isFocused
+  //   );
 
 const Suggestions: React.FC<ISuggestions> = ({
   query,
@@ -74,17 +74,19 @@ const Suggestions: React.FC<ISuggestions> = ({
 }) => {
   const suggestionsContainer = useRef(null);
 
-  useEffect(() => {
-    // const activeSuggestion =
-    //   suggestionsContainer.current &&
-    //   suggestionsContainer.current.querySelector(classNames.activeSuggestion);
-    const activeSuggestion = suggestionsContainer.current;
+  console.log('suggestions');
 
-    if (activeSuggestion) {
-      maybeScrollSuggestionIntoView(activeSuggestion, suggestionsContainer);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedIndex]);
+  // useEffect(() => {
+  //   // const activeSuggestion =
+  //   //   suggestionsContainer.current &&
+  //   //   suggestionsContainer.current.querySelector(classNames.activeSuggestion);
+  //   const activeSuggestion = suggestionsContainer.current;
+
+  //   if (activeSuggestion) {
+  //     maybeScrollSuggestionIntoView(activeSuggestion, suggestionsContainer);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [selectedIndex]);
 
   const markIt = (i: any, q: any) => {
     const escapedRegex = q.trim().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -102,7 +104,7 @@ const Suggestions: React.FC<ISuggestions> = ({
     q.length >= minQueryLength && isFocused;
 
   const _renderSuggestion = (i: any, q: any) => {
-    if (typeof renderSuggestion === 'function') {
+    if (renderSuggestion) {
       return renderSuggestion(i, q);
     }
     return <span dangerouslySetInnerHTML={markIt(i, q)} />;
