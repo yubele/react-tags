@@ -23,6 +23,7 @@
   "scripts": {
     "build": "rimraf lib && rollup -c",
     "lint": "eslint '**/*.{ts,tsx}' --max-warnings 0 --cache",
+    "serve": "yarn build && http-server -o /playground .",
     "prepare": "husky install"
   },
   "devDependencies": {

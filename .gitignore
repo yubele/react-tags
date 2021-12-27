@@ -3,6 +3,7 @@ lib/
 .rollup.cache/
 .eslintcache
 *.log
+playground
 
 # IDE
 .idea
